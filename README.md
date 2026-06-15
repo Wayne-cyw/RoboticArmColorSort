@@ -4,8 +4,7 @@
 
 [![Unity][Unity-shield]][Unity-url]
 [![CSharp][CSharp-shield]][CSharp-url]
-[![License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
 
 <br />
 <div align="center">
@@ -18,14 +17,6 @@
   <p align="center">
     A Unity-based robotics simulation featuring a UR5 robot arm that uses a visual sensor to identify, pick up, and sort colored blocks using inverse kinematics and articulation body physics.
     <br />
-    <a href="https://github.com/YOUR_USERNAME/robotic-arm-color-sort"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/YOUR_USERNAME/robotic-arm-color-sort">View Demo</a>
-    ·
-    <a href="https://github.com/YOUR_USERNAME/robotic-arm-color-sort/issues/new?labels=bug">Report Bug</a>
-    ·
-    <a href="https://github.com/YOUR_USERNAME/robotic-arm-color-sort/issues/new?labels=enhancement">Request Feature</a>
   </p>
 </div>
 
@@ -282,41 +273,19 @@ TaskManager  ←─────────────────────�
 
 ---
 
-## Roadmap
-
-- [x] UR5 robot imported via URDF with correct joint limits and physics
-- [x] Random block spawning with overlap prevention
-- [x] Camera-based visual sensor with scene-view debug visualization
-- [x] Articulation Body joint control for all 6 UR5 joints
-- [x] Gripper pick-and-place with physics-accurate grasping
-- [x] Full task state machine with error handling
-- [x] UI color selection with status feedback
-- [x] Environment reset system
-- [ ] Inverse kinematics solver for arbitrary target positions
-- [ ] ROS 2 bridge integration via ROS-TCP-Connector
-- [ ] Multiple drop boxes (one per color)
-- [ ] ML-Agents reinforcement learning environment wrapper
-- [ ] Real-time joint angle visualization panel
-
-See the [open issues](https://github.com/YOUR_USERNAME/robotic-arm-color-sort/issues) for a full list of proposed features and known issues.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
 ## Robotics Research Context
 
-This project demonstrates several concepts that are directly relevant to robotics research:
+This project was built to develop practical skills relevant to robotics research through hands-on simulation work.
 
-| Simulation Concept | Real Robotics Equivalent |
-|---|---|
-| Unity ArticulationBody joints | ROS `JointState` messages with position control |
-| Visual sensor with tag detection | RGB-D camera pipeline with object classification |
-| Pick pose / drop pose definitions | MoveIt motion planning with named configurations |
-| Task state machine | ROS 2 Behavior Trees / SMACH state machines |
-| URDF robot model | Standard robot description used across all ROS tools |
-| Gripper OverlapSphere detection | Force/torque sensor feedback during grasping |
-| Environment reset | Gymnasium (OpenAI) `env.reset()` for RL training |
+Skills developed:
+
+- Working with URDF robot, the standard format used across ROS-based tools
+- Physics-accurate joint control using Articulation Bodies and drive configuration
+- Designing a perception-action pipeline: sensor detects target, arm plans and executes task
+- Implementing a task state machine for structured, repeatable manipulation sequences
+- Setting up a repeatable simulation environment with randomised initial conditions
+- Importing and configuring a real industry robot model (UR5) used in research labs worldwide
+- Understanding pick-and-place manipulation: approach, grasp, transport, release
 
 The UR5 robot model used in this project is the same model used in real university robotics labs worldwide. The URDF file contains the actual joint limits, link masses, and inertia tensors of the physical robot.
 
@@ -324,21 +293,9 @@ The UR5 robot model used in this project is the same model used in real universi
 
 ---
 
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
 ## Contact
 
-Your Name — [@your_twitter](https://twitter.com/your_username) — your.email@example.com
-
-Project Link: [https://github.com/YOUR_USERNAME/robotic-arm-color-sort](https://github.com/YOUR_USERNAME/robotic-arm-color-sort)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Wayne Chiu - yw.chiu@mail.utoronto.ca or wayne.chiu0823@gmail.com
 
 ---
 
@@ -348,7 +305,6 @@ Project Link: [https://github.com/YOUR_USERNAME/robotic-arm-color-sort](https://
 * [ROS Industrial](https://github.com/ros-industrial/universal_robot) — UR5 URDF robot description
 * [Universal Robots](https://www.universal-robots.com) — UR5 robot hardware specifications
 * [Unity Technologies](https://unity.com) — Unity 6 game engine and ArticulationBody physics
-* [Best-README-Template](https://github.com/othneildrew/Best-README-Template) — README structure
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
