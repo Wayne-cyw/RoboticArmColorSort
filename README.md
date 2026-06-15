@@ -43,7 +43,6 @@
     <li><a href="#script-architecture">Script Architecture</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#robotics-research-context">Robotics Research Context</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -63,17 +62,13 @@ This project is a robotics manipulation simulator built in Unity 6 using a real 
 - A **gripper** picks up the identified block and places it in a designated drop box
 - The user can **reset the environment** at any time, respawning blocks at new random positions
 
-This project was built to demonstrate robotics simulation competency for a research lab application, showcasing skills in manipulation, perception, task planning, and physics-based simulation.
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
 ### Built With
 
-* [![Unity][Unity-shield]][Unity-url]
-* [![CSharp][CSharp-shield]][CSharp-url]
-* [![ROS][ROS-shield]][ROS-url]
+[![Unity][Unity-shield]][Unity-url][![CSharp][CSharp-shield]][CSharp-url][![ROS][ROS-shield]][ROS-url]
 
 **Unity Packages Used:**
 * [URDF Importer](https://github.com/Unity-Technologies/URDF-Importer) — imports real UR5 robot model with joint limits and physics
@@ -104,7 +99,6 @@ This project was built to demonstrate robotics simulation competency for a resea
 * **Unity 6 LTS** — Install via Unity Hub
 * **Git** — [Download here](https://git-scm.com)
 * **Git LFS** — [Download here](https://git-lfs.github.com) (required for binary assets)
-* A code editor — [Visual Studio Community](https://visualstudio.microsoft.com) (recommended) or [VS Code](https://code.visualstudio.com)
 
 ### Installation
 
@@ -243,16 +237,16 @@ UIManager
     │  onClick events
     ↓
 TaskManager  ←──────────────────────────────────┐
-    │                                            │
-    ├──→ VisualSensor.DetectBlock()              │
-    │         Returns: target block position     │
-    │                                            │
+    │                                           │
+    ├──→ VisualSensor.DetectBlock()             │
+    │         Returns: target block position    │
+    │                                           │
     ├──→ ArmController.GoToPose()               │
-    │         Drives: ArticulationBody joints    │
-    │                                            │
+    │         Drives: ArticulationBody joints   │
+    │                                           │
     ├──→ GripperController.CloseGripper()       │
-    │         Grasps: block via OverlapSphere    │
-    │                                            │
+    │         Grasps: block via OverlapSphere   │
+    │                                           │
     └──→ ResetManager.ResetEnvironment() ───────┘
               Calls: BlockSpawner.SpawnAllBlocks()
 ```
