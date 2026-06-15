@@ -34,7 +34,8 @@ public class BlockSpawner : MonoBehaviour
     public Transform spawnZone;
     public float spawnRadius = 0.4f;   // radius of the spawn circle
     public float spawnHeight = 0.05f;  // height above ground
-
+    public float spawnMargin    = 0.08f;
+    public float minInnerRadius = 0.0f; 
     // ─────────────────────────────────────────────────────────────
     // SECTION 3 — Exclusion Zone (Rectangle)
     // Blocks will NOT spawn inside this rectangle.
@@ -126,34 +127,59 @@ public class BlockSpawner : MonoBehaviour
     // to another block, and retries up to maxAttempts times.
     // ─────────────────────────────────────────────────────────────
 
-    private Vector3 FindValidPosition()
+// ─────────────────────────────────────────────────────────────
+// SECTION 9 — Position Finding
+// Uses a margin to guarantee blocks stay fully inside the circle.
+// Picks a random angle and a random radius between minInnerRadius
+// and (spawnRadius - spawnMargin), so blocks never clip the edge.
+// ─────────────────────────────────────────────────────────────
+
+private Vector3 FindValidPosition()
+{
+    // Safe radius — block centre never gets closer than spawnMargin
+    // to the circle edge, guaranteeing it stays fully inside
+    float safeRadius = spawnRadius - spawnMargin;
+
+    if (safeRadius <= 0f)
     {
-        for (int attempt = 0; attempt < maxAttempts; attempt++)
-        {
-            // Random point inside a circle on the XZ plane
-            Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
-
-            Vector3 candidate = spawnZone.position + new Vector3(
-                randomCircle.x,
-                spawnHeight,
-                randomCircle.y
-            );
-
-            // Reject if inside the exclusion rectangle
-            if (useExclusionZone && IsInsideExclusionZone(candidate))
-                continue;
-
-            // Reject if too close to another block
-            if (IsTooCloseToOthers(candidate))
-                continue;
-
-            return candidate;
-        }
-
-        Debug.LogWarning($"[BlockSpawner] Could not find valid position after " +
-                         $"{maxAttempts} attempts. Using fallback.");
-        return GetFallbackPosition();
+        Debug.LogError("[BlockSpawner] spawnMargin is too large for the spawnRadius.");
+        return spawnZone.position + Vector3.up * spawnHeight;
     }
+
+    for (int attempt = 0; attempt < maxAttempts; attempt++)
+    {
+        // Random angle around the circle
+        float angle = Random.Range(0f, Mathf.PI * 2f);
+
+        // Random radius between minInnerRadius and safeRadius
+        // Using Sqrt gives uniform distribution across the circle area
+        // (without Sqrt, points cluster toward the centre)
+        float radius = Mathf.Sqrt(Random.Range(
+            minInnerRadius * minInnerRadius,
+            safeRadius     * safeRadius
+        ));
+
+        Vector3 candidate = spawnZone.position + new Vector3(
+            Mathf.Cos(angle) * radius,
+            spawnHeight,
+            Mathf.Sin(angle) * radius
+        );
+
+        // Reject if inside the exclusion rectangle
+        if (useExclusionZone && IsInsideExclusionZone(candidate))
+            continue;
+
+        // Reject if too close to another block
+        if (IsTooCloseToOthers(candidate))
+            continue;
+
+        return candidate;
+    }
+
+    Debug.LogWarning($"[BlockSpawner] Could not find valid position after " +
+                     $"{maxAttempts} attempts. Using fallback.");
+    return GetFallbackPosition();
+}
 
     // ─────────────────────────────────────────────────────────────
     // SECTION 10 — Exclusion Zone Check
